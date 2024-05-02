@@ -1,6 +1,6 @@
 import { Spin } from 'antd';
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ProtectedRoute from './Components/Layout/ProtectedRoute';
 
@@ -28,7 +28,7 @@ class App extends React.PureComponent {
 
     return (
       <div >
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route
               exact={true}
@@ -162,7 +162,7 @@ class App extends React.PureComponent {
             />
             
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     )
   }
