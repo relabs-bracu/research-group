@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Instruction to host the page on github.
+Read the doc from [here](https://www.geeksforgeeks.org/deployment-of-react-application-using-github-pages/)
+For Production, utilise the "homepage" property in the package.json file and while in development mode make sure to change the path to http://server_url:port or simply remove the "homepage" property from the package.json file 
+
 ## Available Scripts
 
 In the project directory, you can run:

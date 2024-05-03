@@ -23,3 +23,14 @@ code {
 .award-title .ant-list-item-meta-title{
   margin: 0 !important;
 }
+.custom-card-head .ant-card-head {
+  background-color: #173149 !important;
+}
+
+.publication-space-item .ant-space-item{
+  margin-bottom: -10px;
+}
+
+.publication-space-item-paragraph{
+  margin-top: 10px !important;
+}

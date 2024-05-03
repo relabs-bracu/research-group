@@ -16,92 +16,53 @@ import profileImages from '../../Assets/profile-images'
 // const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPaginated = true, dataCollector }) => { // this is for paginated data fetched from backend 
 const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPaginated = false, dataCollector }) => {
 
-  const dummyData = [ 
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
-    },
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
-    },
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
-    },
-    {
-      profilePicture: "",
-      name: "Mohammad Yeasin Ali",
-      // student_id,
-      // mobile_no,
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
-    },
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      // gsuite: "test@g.bracu.ac.bd",
-      country: "Bangladesh",
-      about: "Some description",
-      // social_links: [
-      //   {
-      //     linkdin
-      //     google_scholar
-      //     researchgate
-      //     orcid
-      //     github
-      //     portfolio
-      //   }
-      // ]
-    },
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
-    },
-    {
-      profilePicture: "",
-      name: "Dummy User 1",
-      designation: "Undergrade Student",
-      current_workplace: "XYZ IT",
-      email: "test@test.com",
-      country: "Bangladesh",
-      about: "Some description",
+  // const dummyData = [
+  //   {
+  //     title: "Conducting security ceremony using AR/VR",
+  //     author_list: [ "Author One", "Author Two", "Author Three" ],
+  //     venue: "",
+  //     date: "",
+  //     keyword: ["SSI", "Security", "IOT"],
+  //     abstract: "This is a test abstract. This is a test abstract This is a test abstract This is a test abstract This is a test abstract This is a test abstract. This is a test abstract This is a test abstract This is a test abstract This is a test abstract . This is a test abstract This is a test abstract. "
+  //   },
+  //   {
+  //     title: "Passwordless authentication using ssi",
+  //     author_list: [ "Author One", "Author Two", "Author Three" ],
+  //     venue: "",
+  //     date: "",
+  //     keyword: ["SSI", "Security", "IOT"],
+  //     abstract: "This is a test abstract"
+  //   },
+  //   {
+  //     title: "Ownership transfer in consumer IOT",
+  //     author_list: [ "Author One", "Author Two", "Author Three" ],
+  //     venue: "",
+  //     date: "",
+  //     keyword: ["SSI", "Security", "IOT"],
+  //     abstract: "This is a test abstract"
+  //   }
+  // ]
+  const publicationTypeLabel = (type) => {
+    const mapLabel = {
+      journal: "Journal",
+      conference: "Conference",
+      book_chapter: "Book Chapter",
+      thesis: "Thesis"
     }
-   ]
+
+    return mapLabel[ type ]
+  }
 
   return (
     <Card 
-      title={ <Typography.Title level={ 2 } style={{ textAlign: 'center', color: '#2b2e30', fontSize: '24px' }}>{ sectionTitle }</Typography.Title> } 
+      className='custom-card-head'
+      title={ 
+        <Typography.Title level={ 2 } bodyStyle={{  }} style={{ textAlign: 'center', color: 'white', fontSize: '24px', backgroundColor: '#173149' }}>--- { sectionTitle } ---</Typography.Title> 
+      } 
     >
-      { console.log({ data }) }
         <List
-          // bordered
+          // size='small'
+          loading={ data?.listData ? false : true }
           grid={{ gutter: [16, 32], column: 3, xs: 1, sm: 1, md: 2, lg: 2, xxl: 4}}
           pagination={ 
             isPaginated ? 
@@ -118,7 +79,7 @@ const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPagina
           // dataSource={ dummyData ?? [] }
           itemLayout={ 'vertical' }
           renderItem={(item, index) => (
-              <List.Item style={{ width: '97%', paddingLeft: '7px' }}>
+              <List.Item style={{ width: '97%', padding: '17px 17px 0 17px', border: '1px solid rgb(248, 248, 248)' }}>
                 {console.log({CC: data?.paginationData?.total})}
                   <List.Item.Meta
                     style={ listType === 'profile' ? { display: 'block', textAlign: 'center', marginInlineEnd: 0 } : { }}
@@ -144,7 +105,7 @@ const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPagina
 
                       </Space>
                       :
-                      <a href={ item?.link ?? '' } rel="noreferrer" target="_blank"><FileDoneOutlined style={{ fontSize: 18, paddingRight: '5px' }}/>{ item?.title ?? '-' }</a>
+                      <a href={ item?.link ?? '' } rel="noreferrer" target="_blank" style={{ color: '#094d8d' }}><FileDoneOutlined style={{ fontSize: 18, paddingRight: '5px' }}/>{ item?.title ?? '' }</a>
                     }
 
                     description={ 
@@ -189,11 +150,23 @@ const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPagina
                         {
                           listType === 'publication' && 
                           [
-                            <Space direction={ 'vertical' }>
+                            <Space direction={ 'vertical' } className='publication-space-item'>
                               {/* { item.keyword }) */}
                               
-                              <Typography.Text style={{ color: 'blue' }}><Typography.Text style={{ color: 'blue' }} underline>Authors:</Typography.Text> { item?.author_list?.join(', ') ?? '-' }</Typography.Text>
-                              <Typography.Text>Venue: { item?.venue ?? '-' } | First Online: { item?.date ?? '-' }</Typography.Text>
+                              {/* <Typography.Text style={{ color: 'grey' }}> */}
+                              <Typography.Text >
+                                <Typography.Text style={{ color: 'rgb(9, 77, 141)'}}>Authors: </Typography.Text> 
+                                { item?.authors ?? '-' }
+                              </Typography.Text>
+                              <Typography.Text>
+                                {/* {  */}
+                                  <Typography.Text style={{ color: 'rgb(9, 77, 141)'}}> { publicationTypeLabel(item?.type) + ": "  }</Typography.Text>{  item?.venue + " || " ?? '-' } 
+                                {/* } */}
+                                 
+                                <Tag color={ "geekblue" } style={{ margin: '0 0 0 5px', padding: '0 3px' }}> {  item?.date ?? '-' } </Tag>
+                              </Typography.Text>
+                              {/* <Divider style={{ margin: '15px 0 0 0' }}/> */}
+                              
                               {
                                 item?.keyword &&
                                 <Space direction='horizontal' wrap={ true }>
@@ -202,7 +175,12 @@ const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPagina
                                   }
                                 </Space>
                               }
-                              <Typography.Text type='secondary'><Typography.Text type='secondary' underline>Description:</Typography.Text>{ item?.abstract ?? '-' }</Typography.Text>
+                              <Space className='publication-space-item-paragraph'>
+                                <Typography.Text type='secondary' >
+                                  {/* <Typography.Text type='secondary' underline>Description:</Typography.Text> */}
+                                  { item?.description ? item?.description?.slice(0, 600) + '.......' : 'Abstract not available at the moment.' }
+                                </Typography.Text>
+                              </Space>
                             </Space>,
                             
                           ]
@@ -221,9 +199,10 @@ const ListContainer = ({ sectionTitle, data, listType, isAuthenticated, isPagina
                     <a href={ 'https://google.com' } target={ '_blank' }><Avatar src={ portfolio } size={ 25 }/></a>
                   </div>
                 } */}
-                <Divider direction={ 'horizontal' }/>
+                <Divider/>
+                <Divider/>
               </List.Item>
-          )}
+          ) }
         />
     </Card>
   );

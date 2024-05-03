@@ -25,42 +25,22 @@ const getUser = ({ limit = 9, page = 1 }) => {
     }
 }
 
-// Get members data from backend
+// Get members data from excel
 const getUserFromExcel = () => {
     return async dispatch => {
         try {
-            // const response = await axios.get( `${ USER.GET_ALL }?limit=${ limit }&page=${ page }` )
-            // const userList = response?.data
-            // console.log({ userList })
-            // const transformedData = transformVerifiersLastPositionGeoLocation(data)            
-
-            // ///////////////////////////////
-
             const filePath = require('../../Db/db-user.csv');
-
             const bufferResponse = await fetch(filePath)
             const data = await bufferResponse.arrayBuffer()
 
-
-
-            // .then((response) => response.arrayBuffer())
-            // .then((data) => {
-                const workbook = XLSX.read(data, { type: 'array' });
-                const sheetName = workbook.SheetNames[0]; // Assume only one sheet
-                const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                const userList = formatExcelData(jsonData)
-                console.log({sheet, jsonData, userList});
-            // })
-            // .catch((error) => {
-            //     console.error('Error reading Excel file:', error);
-            // });
-
-            // ///////////////////////////
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0]; // Assume only one sheet
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const userList = formatExcelData(jsonData)
+            console.log({sheet, jsonData, userList});
 
             dispatch(setUserList( userList ))
-            // 'CALL END')
-            // dispatch(activateSocketConnection())
         } catch ( err ) {
             console.error( err )
             // dispatch(setError(error.response.data.message))
